@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: #FFEBA1; 
+}
+
 :root {
   -moz-tab-size: 4;
   tab-size: 4;
@@ -58,4 +62,27 @@
 .hearsay {
   text-align: center;
   margin: 0 auto;
+  color:#6F69AC; 
+}
+
+.top-bar ul {
+  background-color: #95DAC1;
+}
+
+.top-bar {
+  background-color: #95DAC1;
+  color: #6F69AC;
+}
+
+.menu {
+  background-color: #95DAC1;
+}
+
+a {
+  color: #FD6F96;
+}
+
+.button {
+  background-color: #6F69AC;
+  border-radius: 50%;
 }
