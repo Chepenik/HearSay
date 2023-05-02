@@ -5,7 +5,7 @@ import UserSeeder from "./seeders/UserSeeder.js"
 
 class Seeder {
   static async seed() {
-    console.log("seeding websites...")
+    console.log("seeding websites and users...")
     await WebsiteSeeder.seed()
     await UserSeeder.seed()
 
