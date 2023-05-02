@@ -28,7 +28,6 @@ const App = (props) => {
       <TopBar user={currentUser} />
       <Switch>
         <Route exact path="/">
-          <h1 className="hearsay">HearSay</h1>
           <SocialMediaIndexPage />
         </Route>
         <Route exact path="/users/new" component={RegistrationForm} />

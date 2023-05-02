@@ -5,9 +5,7 @@ import SocialMediaList from "./SocialMediaList";
 const SocialMediaIndexPage = (props) => {
     return (
         <div className="grid-container">
-            <BrowserRouter>
                 <SocialMediaList />
-            </BrowserRouter>
         </div>
     )
 };

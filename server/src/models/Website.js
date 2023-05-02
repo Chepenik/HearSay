@@ -17,10 +17,6 @@ class Website extends Model {
             },
         }
     }
-
-    static get relationMappings() {
-        
-    }
 }
 
 module.exports = Website
