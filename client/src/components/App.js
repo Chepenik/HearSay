@@ -7,6 +7,7 @@ import RegistrationForm from "./registration/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import SocialMediaIndexPage from "./SocialMediaIndexPage";
+import SocialMediaForm from "./SocialMediaForm";
 
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute"
 import UserProfile from "./UserProfile";
@@ -37,6 +38,7 @@ const App = (props) => {
         <Route exact path="/user-sessions/new" component={SignInForm} />
         <AuthenticatedRoute exact path="/profile" component ={UserProfile} user={currentUser} />
       </Switch>
+        <SocialMediaForm />
     </Router>
   );
 };
