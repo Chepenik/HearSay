@@ -96,6 +96,9 @@ const SignInForm = () => {
         <div>
           <input type="submit" className="button" value="Sign In" />
         </div>
+        <div>
+          <a href="/auth/google" className="button">Sign in with Google</a>
+        </div>
       </form>
     </div>
   );
