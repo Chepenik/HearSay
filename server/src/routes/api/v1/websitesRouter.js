@@ -12,6 +12,7 @@ websitesRouter.get("/", async (req, res) => {
     }
 })
 
+
 websitesRouter.get("/:id", async (req, res) =>{
     const { id } = req.params
     try {
@@ -21,5 +22,15 @@ websitesRouter.get("/:id", async (req, res) =>{
         return res.status(500).json({ errors: error })
     } 
 })
+
+websitesRouter.post("/", async (req, res) => {
+    try {
+      const websiteData = req.body;
+      const newWebsite = await Website.query().insert(websiteData);
+      return res.status(201).json({ website: newWebsite });
+    } catch (error) {
+      return res.status(500).json({ errors: error });
+    }
+});  
 
 export default websitesRouter;

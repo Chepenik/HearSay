@@ -12,3 +12,140 @@
   -moz-tab-size: 4;
   tab-size: 4;
 }
+
+.social-media-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.social-media-item {
+  margin: 10px;
+  text-align: center;
+  flex-basis: calc(25% - 20px); /* set the width of each item to 25% minus the margin */
+}
+
+.social-media-item a {
+  display: block;
+}
+
+.social-media-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.social-media-item p {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .social-media-item {
+      flex-basis: calc(50% - 20px); /* set the width of each item to 50% minus the margin */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .social-media-item {
+      flex-basis: 100%; /* set the width of each item to 100% to take up the full width of the container */
+  }
+}
+
+.hearsay {
+  text-align: center;
+  margin: 0 auto;
+  color:#6F69AC; 
+}
+
+.top-bar ul {
+  background-color: #95DAC1;
+}
+
+.top-bar {
+  background-color: #95DAC1;
+  color: #6F69AC;
+}
+
+.menu {
+  background-color: #95DAC1;
+}
+
+a {
+  color: #FD6F96;
+}
+
+.button {
+  background-color: #6F69AC;
+  border-radius: 50%;
+}
+
+.form-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+}
+
+.form-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+  width: 100%;
+  padding: 12px 20px;
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+  border-color: #007BFF;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.submit-btn {
+  display: inline-block;
+  background-color: #007BFF;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
