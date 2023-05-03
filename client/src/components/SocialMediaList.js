@@ -1,29 +1,28 @@
 import React, { useState, useEffect } from "react";
 import SocialMediaTile from "./SocialMediaTile";
 
-const SocialMediaList = (props) => {
-  const [socialMedia, setSocialMedia] = useState([]);
+const SocialMediaList = () => {
+  const [socialMediaSites, setSocialMediaSites] = useState([]);
 
-  const getSocialMedia = async () => {
+  const fetchSocialMediaSites = async () => {
     try {
       const response = await fetch("/api/v1/websites");
-      if (!response.ok) {
-        const errorMessage = `${response.status} (${response.statusText})`;
-        const error = new Error(errorMessage);
-        throw error;
+      if (response.ok) {
+        const data = await response.json();
+        setSocialMediaSites(data.websites);
+      } else {
+        console.error("Failed to fetch social media sites:", response.statusText);
       }
-      const data = await response.json();
-      setSocialMedia(data.websites);
-    } catch (err) {
-      console.error(`Error in fetch: ${err.message}`);
+    } catch (error) {
+      console.error("Error fetching social media sites:", error);
     }
   };
 
   useEffect(() => {
-    getSocialMedia();
+    fetchSocialMediaSites();
   }, []);
 
-  const socialMediaItems = socialMedia.map((socialMedia) => {
+  const socialMediaItems = socialMediaSites.map((socialMedia) => {
     return <SocialMediaTile key={socialMedia.id} socialMedia={socialMedia} />;
   });
 
