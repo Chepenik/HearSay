@@ -18,6 +18,9 @@ const TopBar = ({ user }) => {
     <li>
       <Link to="/profile">Your Profile</Link>
     </li>,
+    <li key="add-site">
+      <Link to="/add-site">Add Social Media</Link>
+    </li>,
     <li key="sign-out">
       <SignOutButton />
     </li>,

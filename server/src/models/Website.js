@@ -17,6 +17,14 @@ class Website extends Model {
             },
         }
     }
+
+    static async findAll() {
+        return this.query();
+      }
+    
+      static async saveAll(data) {
+        return this.query().insert(data);
+      }
 }
 
 module.exports = Website
