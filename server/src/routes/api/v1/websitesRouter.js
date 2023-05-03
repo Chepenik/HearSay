@@ -1,7 +1,17 @@
 import express from "express";
-import { Website } from "../../../models/index.js";
+import { Website, Comment } from "../../../models/index.js";
 
 const websitesRouter = new express.Router();
+
+websitesRouter.get("/:id/comments", async (req, res) => {
+    const { id } = req.params;
+    try {
+      const comments = await Comment.query().where({ websiteId: id });
+      return res.status(200).json({ comments });
+    } catch (error) {
+      return res.status(500).json({ errors: error });
+    }
+  });
 
 websitesRouter.get("/", async (req, res) => {
     try {
@@ -12,12 +22,12 @@ websitesRouter.get("/", async (req, res) => {
     }
 })
 
-
 websitesRouter.get("/:id", async (req, res) =>{
     const { id } = req.params
     try {
         const website = await Website.query().findById(id)
-        return res.status(200).json({ website: website })
+        const comments = await website.$relatedQuery("comments")
+        return res.status(200).json({ website: website, comments: comments })
     } catch(error) {
         return res.status(500).json({ errors: error })
     } 
