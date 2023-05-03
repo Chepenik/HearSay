@@ -27,13 +27,12 @@ const SocialMediaShow = props => {
         getSocialMedia()
     }, [])
 
-    return(
-        <div>
-            <h2>{socialMediaShow.name}</h2>
-            <a href={socialMediaShow.url}>Go to page</a>
-            <p>{socialMediaShow.description}</p>
-        </div>
-    )
+return (
+    <div className="show-page">
+      <h2 className="show-title">{socialMediaShow.name}</h2>
+      <a href={socialMediaShow.url} target='_blank'>Check Out The Platform</a>
+      <p>{socialMediaShow.description}</p>
+    </div>
+  );
 }
-
 export default SocialMediaShow
