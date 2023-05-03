@@ -6,10 +6,10 @@ import "../assets/scss/main.scss";
 import RegistrationForm from "./registration/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
-import SocialMediaIndexPage from "./SocialMediaIndexPage";
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute";
 import UserProfile from "./UserProfile";
 import SocialMediaForm from "./SocialMediaForm";
+import SocialMediaList from "./SocialMediaList";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -31,7 +31,7 @@ const App = (props) => {
       <TopBar user={currentUser} />
       <Switch>
         <Route exact path="/">
-          <SocialMediaIndexPage />
+        <SocialMediaList className="grid-container" />
         </Route>
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />

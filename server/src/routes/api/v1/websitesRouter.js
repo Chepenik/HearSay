@@ -20,6 +20,6 @@ websitesRouter.post("/", async (req, res) => {
     } catch (error) {
       return res.status(500).json({ errors: error });
     }
-  });  
+});  
 
 export default websitesRouter;
