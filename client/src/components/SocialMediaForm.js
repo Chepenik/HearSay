@@ -42,33 +42,42 @@ const SocialMediaForm = () => {
     return <Redirect to="/" />;
   }
 
+
   return (
-    <form onSubmit={handleSubmit}>
-      <h5>Add A New Social Site For People To Review</h5>
-      <label htmlFor="name">Name</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        value={formData.name}
-        onChange={handleChange}
-      />
-      <label htmlFor="url">URL</label>
-      <input
-        type="text"
-        id="url"
-        name="url"
-        value={formData.url}
-        onChange={handleChange}
-      />
-      <label htmlFor="description">Description</label>
-      <textarea
-        id="description"
-        name="description"
-        value={formData.description}
-        onChange={handleChange}
-      />
-      <input type="submit" value="Add" />
+    <form className="form-container" onSubmit={handleSubmit}>
+      <h5 className="form-title">Add A New Social Site For People To Review</h5>
+      <div className="form-group">
+        <label htmlFor="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="url">URL</label>
+        <input
+          type="text"
+          id="url"
+          name="url"
+          value={formData.url}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="description">Description</label>
+        <textarea
+          id="description"
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+        />
+      </div>
+      <button type="submit" className="submit-btn button">
+        Submit
+      </button>
     </form>
   );
 };
