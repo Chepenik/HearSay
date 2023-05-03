@@ -7,9 +7,9 @@ import RegistrationForm from "./registration/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import SocialMediaIndexPage from "./SocialMediaIndexPage";
-
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute"
 import UserProfile from "./UserProfile";
+import SocialMediaShow from "./SocialMediaShow";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -35,6 +35,7 @@ const App = (props) => {
         </Route>
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
+        <Route exact path="/websites/:id" component={SocialMediaShow} />
         <AuthenticatedRoute exact path="/profile" component ={UserProfile} user={currentUser} />
       </Switch>
     </Router>

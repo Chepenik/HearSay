@@ -1,88 +1,14 @@
 @import "./foundation/settings";
 @import "~foundation-sites/scss/foundation";
 @include foundation-everything;
-
+// place global css here
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-body {
-  background-color: #FFEBA1; 
-}
-
 :root {
   -moz-tab-size: 4;
   tab-size: 4;
-}
-
-.social-media-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.social-media-item {
-  margin: 10px;
-  text-align: center;
-  flex-basis: calc(25% - 20px); /* set the width of each item to 25% minus the margin */
-}
-
-.social-media-item a {
-  display: block;
-}
-
-.social-media-item img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-bottom: 10px;
-}
-
-.social-media-item p {
-  font-size: 14px;
-  font-weight: bold;
-  margin: 0;
-}
-
-@media screen and (max-width: 768px) {
-  .social-media-item {
-      flex-basis: calc(50% - 20px); /* set the width of each item to 50% minus the margin */
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .social-media-item {
-      flex-basis: 100%; /* set the width of each item to 100% to take up the full width of the container */
-  }
-}
-
-.hearsay {
-  text-align: center;
-  margin: 0 auto;
-  color:#6F69AC; 
-}
-
-.top-bar ul {
-  background-color: #95DAC1;
-}
-
-.top-bar {
-  background-color: #95DAC1;
-  color: #6F69AC;
-}
-
-.menu {
-  background-color: #95DAC1;
-}
-
-a {
-  color: #FD6F96;
-}
-
-.button {
-  background-color: #6F69AC;
-  border-radius: 50%;
 }
