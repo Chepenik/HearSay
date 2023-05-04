@@ -1,21 +1,21 @@
 import express from "express";
 import passport from "passport";
-import objection from "objection"
+import objection from "objection";
 import { ValidationError } from "objection";
 import { User } from "../../../models/index.js";
 import cleanUserInput from "../../../services/cleanUserInput.js";
 import UserSerializer from "../../../serializers/UserSerializer.js";
 
-
 const usersRouter = new express.Router();
 
-usersRouter.get("/", async (req, res) => {
+usersRouter.get("/:userId", async (req, res) => {
+  const { userId } = req.params;
   try {
-    const users = await User.query();
-    const serializedUsers = users.map(user => UserSerializer.showDetails(user))
-    return res.status(200).json({ users: serializedUsers });
+    const user = await User.query().findById(userId);
+    return res.status(200).json({ user });
   } catch (error) {
-    return res.status(500).json({ error });
+    console.error("Error fetching user:", error);
+    return res.status(500).json({ error: "Error fetching user" });
   }
 });
 

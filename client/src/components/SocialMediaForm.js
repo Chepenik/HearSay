@@ -6,6 +6,7 @@ const SocialMediaForm = () => {
     name: "",
     url: "",
     description: "",
+    imageUrl: "",
   });
   const [redirect, setRedirect] = useState(false);
 
@@ -31,6 +32,7 @@ const SocialMediaForm = () => {
         name: "",
         url: "",
         description: "",
+        imageUrl: "",
       });
       setRedirect(true);
     } else {
@@ -57,7 +59,17 @@ const SocialMediaForm = () => {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="url">URL</label>
+        <label htmlFor="imageUrl">Image Logo URL</label>
+        <input
+          type="text"
+          id="imageUrl"
+          name="imageUrl"
+          value={formData.imageUrl}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="url">Website URL</label>
         <input
           type="text"
           id="url"
@@ -75,7 +87,7 @@ const SocialMediaForm = () => {
           onChange={handleChange}
         />
       </div>
-      <button type="submit" className="submit-btn button">
+      <button type="submit" className="submit-btn">
         Submit
       </button>
     </form>
