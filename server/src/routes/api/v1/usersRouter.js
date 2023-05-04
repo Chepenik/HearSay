@@ -4,6 +4,7 @@ import objection from "objection";
 import { ValidationError } from "objection";
 import { User } from "../../../models/index.js";
 import cleanUserInput from "../../../services/cleanUserInput.js";
+import UserSerializer from "../../../serializers/UserSerializer.js";
 
 const usersRouter = new express.Router();
 
