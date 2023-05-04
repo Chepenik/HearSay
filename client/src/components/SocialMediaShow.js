@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import CommentTile from "./CommentTile";
 import CommentForm from "./CommentForm";
 
 const SocialMediaShow = (props) => {
@@ -11,7 +10,6 @@ const SocialMediaShow = (props) => {
   });
 
   const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState("");
 
   const getSocialMedia = async () => {
     const socialMediaId = props.match.params.id;
@@ -34,19 +32,7 @@ const SocialMediaShow = (props) => {
     getSocialMedia();
   }, []);
 
-  const commentList = comments && comments.length > 0 ? (
-    comments.map((comment, index) => (
-      <CommentTile key={comment.id} comment={comment} index={index} />
-    ))
-  ) : (
-    <p>No comments yet.</p>
-  );
-
-  const handleCommentChange = (event) => {
-    setNewComment(event.target.value);
-  };
-
-  const handleCommentSubmit = async (event) => {
+  const handleCommentSubmit = async (event, newComment) => {
     event.preventDefault();
 
     try {
@@ -61,7 +47,6 @@ const SocialMediaShow = (props) => {
       if (response.ok) {
         const body = await response.json();
         setComments([...comments, body.comment]);
-        setNewComment("");
       } else {
         console.error("Failed to add comment:", response.statusText);
       }
@@ -77,12 +62,7 @@ const SocialMediaShow = (props) => {
         Check Out The Platform
       </a>
       <p>{socialMediaShow.description}</p>
-      <CommentForm
-        newComment={newComment}
-        handleCommentChange={handleCommentChange}
-        handleCommentSubmit={handleCommentSubmit}
-      />
-      <ul>{commentList}</ul>
+      <CommentForm handleCommentSubmit={handleCommentSubmit} comments={comments} />
     </div>
   );
 };
