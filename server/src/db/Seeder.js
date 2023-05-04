@@ -6,9 +6,9 @@ import CommentSeeder from "./seeders/CommentSeeder.js"
 
 class Seeder {
   static async seed() {
-    // console.log("seeding websites and users...")
-    // await WebsiteSeeder.seed()
-    // await UserSeeder.seed()
+    console.log("seeding websites and users...")
+    await WebsiteSeeder.seed()
+    await UserSeeder.seed()
 
     console.log("seeding comments...")
     await CommentSeeder.seed()

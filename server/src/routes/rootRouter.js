@@ -11,4 +11,3 @@ rootRouter.use("/api/v1/users", usersRouter);
 rootRouter.use("/api/v1/websites", websitesRouter);
 
 export default rootRouter;
-
