@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CommentForm from "./CommentForm";
+import CommentTile from "./CommentTile";
 
 const SocialMediaShow = (props) => {
   const [socialMediaShow, setSocialMediaShow] = useState({
@@ -55,6 +56,14 @@ const SocialMediaShow = (props) => {
     }
   };
 
+  const commentList = comments && comments.length > 0 ? (
+    comments.map((comment, index) => (
+      <CommentTile key={comment.id} comment={comment} index={index} />
+    ))
+  ) : (
+    <p>No comments yet.</p>
+  );
+
   return (
     <div className="show-page">
       <h2 className="show-title">{socialMediaShow.name}</h2>
@@ -62,9 +71,11 @@ const SocialMediaShow = (props) => {
         Check Out The Platform
       </a>
       <p>{socialMediaShow.description}</p>
-      <CommentForm handleCommentSubmit={handleCommentSubmit} comments={comments} />
+      <CommentForm handleCommentSubmit={handleCommentSubmit} />
+      <ul>{commentList}</ul>
     </div>
   );
 };
 
 export default SocialMediaShow;
+

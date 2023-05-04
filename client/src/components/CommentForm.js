@@ -14,16 +14,7 @@ const CommentForm = ({ handleCommentSubmit, comments }) => {
     setNewComment("");
   };
 
-  const commentList = comments && comments.length > 0 ? (
-    comments.map((comment, index) => (
-      <CommentTile key={comment.id} comment={comment} index={index} />
-    ))
-  ) : (
-    <p>No comments yet.</p>
-  );
-
   return (
-    <div>
       <form onSubmit={handleSubmit}>
         <label>
           Add a comment:
@@ -38,8 +29,6 @@ const CommentForm = ({ handleCommentSubmit, comments }) => {
           Submit
         </button>
       </form>
-      <ul>{commentList}</ul>
-    </div>
   );
 };
 
