@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import CommentTile from "./CommentTile";
+import CommentForm from "./CommentForm";
 
-const SocialMediaShow = props => {
+const SocialMediaShow = (props) => {
   const [socialMediaShow, setSocialMediaShow] = useState({
+    id: "",
     name: "",
     url: "",
     description: "",
@@ -28,15 +30,17 @@ const SocialMediaShow = props => {
     }
   };
 
-  const renderComments = () => {
-    if (comments && comments.length > 0) {
-      return comments.map((comment) => (
-        <CommentTile key={comment.id} comment={comment} />
-      ));
-    } else {
-      return <p>No comments yet.</p>;
-    }
-  }
+  useEffect(() => {
+    getSocialMedia();
+  }, []);
+
+  const commentList = comments && comments.length > 0 ? (
+    comments.map((comment, index) => (
+      <CommentTile key={comment.id} comment={comment} index={index} />
+    ))
+  ) : (
+    <p>No comments yet.</p>
+  );
 
   const handleCommentChange = (event) => {
     setNewComment(event.target.value);
@@ -44,27 +48,27 @@ const SocialMediaShow = props => {
 
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch(`/api/v1/websites/${socialMediaShow.id}/comments`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        comment: newComment,
-      }),
-    });
-    if (response.ok) {
-      const comment = await response.json();
-      setComments([...comments, comment]);
-      setNewComment("");
-    } else {
-      console.error("Failed to add comment:", response.statusText);
+
+    try {
+      const response = await fetch(`/api/v1/websites/${socialMediaShow.id}/comments`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ comment: newComment }),
+      });
+
+      if (response.ok) {
+        const body = await response.json();
+        setComments([...comments, body.comment]);
+        setNewComment("");
+      } else {
+        console.error("Failed to add comment:", response.statusText);
+      }
+    } catch (error) {
+      console.error(`Error in fetch: ${error.message}`);
     }
   };
-
-  useEffect(() => {
-    getSocialMedia();
-  }, []);
 
   return (
     <div className="show-page">
@@ -73,14 +77,12 @@ const SocialMediaShow = props => {
         Check Out The Platform
       </a>
       <p>{socialMediaShow.description}</p>
-      <form onSubmit={handleCommentSubmit}>
-        <label>
-          Add a comment:
-          <input type="text" name="comment" value={newComment} onChange={handleCommentChange} />
-        </label>
-        <button type="submit">Submit</button>
-      </form>
-      <ul>{renderComments()}</ul>
+      <CommentForm
+        newComment={newComment}
+        handleCommentChange={handleCommentChange}
+        handleCommentSubmit={handleCommentSubmit}
+      />
+      <ul>{commentList}</ul>
     </div>
   );
 };

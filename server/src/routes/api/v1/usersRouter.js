@@ -1,12 +1,26 @@
 import express from "express";
 import passport from "passport";
-import objection from "objection"
+import objection from "objection";
 import { ValidationError } from "objection";
 import { User } from "../../../models/index.js";
 import cleanUserInput from "../../../services/cleanUserInput.js";
 
-
 const usersRouter = new express.Router();
+
+usersRouter.get("/:userId", async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const user = await User.query().findById(userId);
+    if (user) {
+      return res.status(200).json({ user });
+    } else {
+      return res.status(404).json({ error: "User not found" });
+    }
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    return res.status(500).json({ error: "Error fetching user" });
+  }
+});
 
 usersRouter.post("/", async (req, res) => {
   const formInput = cleanUserInput(req.body)

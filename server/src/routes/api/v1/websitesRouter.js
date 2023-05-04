@@ -1,17 +1,10 @@
 import express from "express";
-import { Website, Comment } from "../../../models/index.js";
+import { Website } from "../../../models/index.js";
+import websitesCommentsRouter from "./websitesCommentsRouter.js";
 
 const websitesRouter = new express.Router();
 
-websitesRouter.get("/:id/comments", async (req, res) => {
-    const { id } = req.params;
-    try {
-      const comments = await Comment.query().where({ websiteId: id });
-      return res.status(200).json({ comments });
-    } catch (error) {
-      return res.status(500).json({ errors: error });
-    }
-  });
+websitesRouter.use("/:id/comments", websitesCommentsRouter);
 
 websitesRouter.get("/", async (req, res) => {
     try {
