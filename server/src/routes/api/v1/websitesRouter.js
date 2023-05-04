@@ -10,7 +10,7 @@ websitesRouter.use("/:id/comments", websitesCommentsRouter);
 websitesRouter.get("/", async (req, res) => {
     try {
         const websites = await Website.query();
-        const serializedWebsites = websites.map(website => WebsiteSerializer.showDetails(website))
+        const serializedWebsites = websites.map(website => WebsiteSerializer.getDetailsForList(website))
         return res.status(200).json({ websites: serializedWebsites });
     } catch (error) {
         return res.status(500).json({ errors: error });

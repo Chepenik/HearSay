@@ -23,7 +23,7 @@ const SocialMediaShow = (props) => {
       }
       const body = await response.json();
       setSocialMediaShow(body.website);
-      setComments(body.comments);
+      setComments(body.website.comments);
     } catch (err) {
       console.error(`Error in fetch: ${err.message}`);
     }
