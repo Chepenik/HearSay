@@ -78,4 +78,3 @@ const SocialMediaShow = (props) => {
 };
 
 export default SocialMediaShow;
-

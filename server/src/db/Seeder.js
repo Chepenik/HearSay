@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { connection } from "../boot.js"
-// import WebsiteSeeder from "./seeders/WebsiteSeeder.js"
-// import UserSeeder from "./seeders/UserSeeder.js"
+import WebsiteSeeder from "./seeders/WebsiteSeeder.js"
+import UserSeeder from "./seeders/UserSeeder.js"
 import CommentSeeder from "./seeders/CommentSeeder.js"
 
 class Seeder {
