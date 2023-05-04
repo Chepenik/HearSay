@@ -4,9 +4,20 @@ import objection from "objection"
 import { ValidationError } from "objection";
 import { User } from "../../../models/index.js";
 import cleanUserInput from "../../../services/cleanUserInput.js";
+import UserSerializer from "../../../serializers/UserSerializer.js";
 
 
 const usersRouter = new express.Router();
+
+usersRouter.get("/", async (req, res) => {
+  try {
+    const users = await User.query();
+    const serializedUsers = users.map(user => UserSerializer.showDetails(user))
+    return res.status(200).json({ users: serializedUsers });
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+});
 
 usersRouter.post("/", async (req, res) => {
   const formInput = cleanUserInput(req.body)
