@@ -8,7 +8,6 @@ websitesCommentsRouter.post("/", async (req, res) => {
   const { comment } = req.body;
 
   try {
-    const website = await Website.query().findById(websiteId);
     const userId = req.user.id;
     const newComment = await Comment.query().insert({ comment, userId, websiteId });
 

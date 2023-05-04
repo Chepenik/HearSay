@@ -9,7 +9,6 @@ class Comment extends Model {
     return {
       type: "object",
       required: ["comment", "websiteId", "userId"],
-
       properties: {
         comment: { type: "string" },
         websiteId: { type: ["integer", "string"] },

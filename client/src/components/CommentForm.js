@@ -12,7 +12,7 @@ const CommentForm = ({ newComment, handleCommentChange, handleCommentSubmit }) =
           onChange={handleCommentChange}
         />
       </label>
-      <button type="submit" className="commentbtn">
+      <button type="submit" className="comment-btn">
         Submit
       </button>
     </form>

@@ -10,7 +10,6 @@ class Website extends Model {
     return {
       type: "object",
       required: ["name", "url", "description"],
-
       properties: {
         name: { type: "string" },
         url: { type: "string" },

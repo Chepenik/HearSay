@@ -1,6 +1,6 @@
 import React from "react";
 
-const CommentTile = ({ comment, index }) => {
+const CommentTile = ({ comment }) => {
   const { comment: text } = comment;
 
   return (
