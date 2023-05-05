@@ -8,6 +8,7 @@ const SocialMediaForm = () => {
     description: "",
     imageUrl: "",
   });
+  const [errors, setErrors] = useState({});
   const [redirect, setRedirect] = useState(false);
 
   const handleChange = (event) => {
@@ -20,28 +21,35 @@ const SocialMediaForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    let hasError = false;
+    let submitErrors = {};
     if (formData.name.trim() === "") {
-      alert("Error: Name cannot be empty.");
-      console.error("Error: Name cannot be empty.");
-      hasError = true;
+      submitErrors = {
+        ...submitErrors,
+        name: "cannot be empty",
+      };
     }
     if (formData.url.trim() === "") {
-      alert("Error: URL cannot be empty.");
-      console.error("Error: URL cannot be empty.");
-      hasError = true;
+      submitErrors = {
+        ...submitErrors,
+        url: "cannot be empty",
+      };
     }
     if (formData.description.trim() === "") {
-      alert("Error: Description cannot be empty.");
-      console.error("Error: Description cannot be empty.");
-      hasError = true;
+      submitErrors = {
+        ...submitErrors,
+        description: "cannot be empty",
+      };
     }
     if (formData.imageUrl.trim() === "") {
-      alert("Error: Image URL cannot be empty.");
-      console.error("Error: Image URL cannot be empty.");
-      hasError = true;
+      submitErrors = {
+        ...submitErrors,
+        imageUrl: "cannot be empty",
+      };
     }
-    if (!hasError) {
+
+    setErrors(submitErrors);
+
+    if (Object.keys(submitErrors).length === 0) {
       const response = await fetch("/api/v1/websites", {
         method: "POST",
         headers: {
@@ -50,12 +58,6 @@ const SocialMediaForm = () => {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        setFormData({
-          name: "",
-          url: "",
-          description: "",
-          imageUrl: "",
-        });
         setRedirect(true);
       } else {
         console.error("Failed to add social media:", response.statusText);
@@ -79,6 +81,7 @@ const SocialMediaForm = () => {
           value={formData.name}
           onChange={handleChange}
         />
+        {errors.name && <p className="error">{`Name ${errors.name}`}</p>}
       </div>
       <div className="form-group">
         <label htmlFor="imageUrl">Image Logo URL</label>
@@ -89,6 +92,7 @@ const SocialMediaForm = () => {
           value={formData.imageUrl}
           onChange={handleChange}
         />
+        {errors.imageUrl && <p className="error">{`Image URL ${errors.imageUrl}`}</p>}
       </div>
       <div className="form-group">
         <label htmlFor="url">Website URL</label>
@@ -99,6 +103,7 @@ const SocialMediaForm = () => {
           value={formData.url}
           onChange={handleChange}
         />
+        {errors.url && <p className="error">{`URL ${errors.url}`}</p>}
       </div>
       <div className="form-group">
         <label htmlFor="description">Description</label>
@@ -108,6 +113,7 @@ const SocialMediaForm = () => {
           value={formData.description}
           onChange={handleChange}
         />
+        {errors.description && <p className="error">{`Description ${errors.description}`}</p>}
       </div>
       <button type="submit" className="submit-btn">
         Submit

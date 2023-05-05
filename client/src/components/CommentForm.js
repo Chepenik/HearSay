@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 const CommentForm = ({ handleCommentSubmit, comments }) => {
   const [newComment, setNewComment] = useState("");
+  const [errors, setErrors] = useState({});
 
   const handleCommentChange = (event) => {
     setNewComment(event.target.value);
@@ -12,9 +13,9 @@ const CommentForm = ({ handleCommentSubmit, comments }) => {
     if (newComment.trim() !== "") {
       handleCommentSubmit(event, newComment);
       setNewComment("");
+      setErrors({});
     } else {
-      alert("Error: Comment cannot be empty.")
-      console.error("Error: Comment cannot be empty.");
+      setErrors({ comment: "Error: Comment cannot be empty." });
     }
   };
 
@@ -29,6 +30,7 @@ const CommentForm = ({ handleCommentSubmit, comments }) => {
           onChange={handleCommentChange}
         />
       </label>
+      {errors.comment && <div className="error">{errors.comment}</div>}
       <button type="submit" className="comment-btn">
         Submit
       </button>
