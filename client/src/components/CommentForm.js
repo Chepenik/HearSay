@@ -17,6 +17,16 @@ const CommentForm = ({ handleCommentSubmit, comments }) => {
   return (
       <form onSubmit={handleSubmit}>
         <label>
+          Rate the site:
+          <input
+            type="text"
+            name="rating"
+            value=
+            onChange=
+          />  
+        </label>
+
+        <label>
           Add a comment:
           <input
             type="text"
