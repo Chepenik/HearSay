@@ -8,11 +8,12 @@ class Comment extends Model {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["comment", "websiteId", "userId"],
+      required: ["comment", "websiteId", "userId", "rating"],
       properties: {
         comment: { type: "string" },
         websiteId: { type: ["integer", "string"] },
         userId: { type: ["integer", "string"] },
+        rating: {type: ["integer", "string"]}
       },
     };
   }
