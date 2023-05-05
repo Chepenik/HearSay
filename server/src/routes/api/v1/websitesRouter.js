@@ -2,6 +2,7 @@ import express from "express";
 import { Website } from "../../../models/index.js";
 import websitesCommentsRouter from "./websitesCommentsRouter.js";
 import WebsiteSerializer from "../../../serializers/WebsiteSerializer.js";
+import CommentSerializer from "../../../serializers/CommentSerializer.js";
 
 const websitesRouter = new express.Router();
 
