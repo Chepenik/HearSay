@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import CommentTile from "./CommentTile";
 
 const CommentForm = ({ handleCommentSubmit, comments }) => {
   const [newComment, setNewComment] = useState("");
