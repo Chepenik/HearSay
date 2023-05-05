@@ -2,16 +2,26 @@ import React, { useState } from "react";
 import CommentTile from "./CommentTile";
 
 const CommentForm = ({ handleCommentSubmit, comments }) => {
-  const [newComment, setNewComment] = useState("");
+  const [newComment, setNewComment] = useState({
+    rating: "",
+    comment: "",
+  });
 
   const handleCommentChange = (event) => {
-    setNewComment(event.target.value);
+    setNewComment({
+      ...newComment,
+      [event.currentTarget.name]: event.currentTarget.value
+    })      
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleCommentSubmit(event, newComment);
-    setNewComment("");
+    // handleCommentSubmit(event, newComment);
+    // setNewComment("");
+    handleCommentSubmit(event, newComment)
+    setNewComment({
+      ...newComment
+    })
   };
 
   return (
@@ -21,8 +31,8 @@ const CommentForm = ({ handleCommentSubmit, comments }) => {
           <input
             type="text"
             name="rating"
-            value=
-            onChange=
+            value={newComment.rating}
+            onChange={handleCommentChange}
           />  
         </label>
 
@@ -31,7 +41,7 @@ const CommentForm = ({ handleCommentSubmit, comments }) => {
           <input
             type="text"
             name="comment"
-            value={newComment}
+            value={newComment.comment}
             onChange={handleCommentChange}
           />
         </label>
