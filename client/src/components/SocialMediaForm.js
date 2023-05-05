@@ -20,30 +20,52 @@ const SocialMediaForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch("/api/v1/websites", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
-    if (response.ok) {
-      setFormData({
-        name: "",
-        url: "",
-        description: "",
-        imageUrl: "",
+    let hasError = false;
+    if (formData.name.trim() === "") {
+      alert("Error: Name cannot be empty.");
+      console.error("Error: Name cannot be empty.");
+      hasError = true;
+    }
+    if (formData.url.trim() === "") {
+      alert("Error: URL cannot be empty.");
+      console.error("Error: URL cannot be empty.");
+      hasError = true;
+    }
+    if (formData.description.trim() === "") {
+      alert("Error: Description cannot be empty.");
+      console.error("Error: Description cannot be empty.");
+      hasError = true;
+    }
+    if (formData.imageUrl.trim() === "") {
+      alert("Error: Image URL cannot be empty.");
+      console.error("Error: Image URL cannot be empty.");
+      hasError = true;
+    }
+    if (!hasError) {
+      const response = await fetch("/api/v1/websites", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
-      setRedirect(true);
-    } else {
-      console.error("Failed to add social media:", response.statusText);
+      if (response.ok) {
+        setFormData({
+          name: "",
+          url: "",
+          description: "",
+          imageUrl: "",
+        });
+        setRedirect(true);
+      } else {
+        console.error("Failed to add social media:", response.statusText);
+      }
     }
   };
 
   if (redirect) {
     return <Redirect to="/" />;
   }
-
 
   return (
     <form className="form-container" onSubmit={handleSubmit}>
