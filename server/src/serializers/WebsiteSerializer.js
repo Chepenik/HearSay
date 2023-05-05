@@ -8,10 +8,7 @@ class WebsiteSerializer {
             serializedWebsite[attribute] = website[attribute]
         }
         const relatedComments = await website.$relatedQuery("comments")
-        const serializedComments = await Promise.all(
-            relatedComments.map(async (comment) =>
-                CommentSerializer.showCommentDetails(comment))
-        )
+        const serializedComments = relatedComments.map((comment) => CommentSerializer.showCommentDetails(comment))
         serializedWebsite.comments = serializedComments
         return serializedWebsite
     }
