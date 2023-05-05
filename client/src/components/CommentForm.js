@@ -9,7 +9,6 @@ const CommentForm = ({ handleCommentSubmit, comments }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     if (newComment.trim() !== "") {
       handleCommentSubmit(event, newComment);
       setNewComment("");
