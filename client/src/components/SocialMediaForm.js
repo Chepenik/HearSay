@@ -9,6 +9,7 @@ const SocialMediaForm = () => {
     imageUrl: "",
   });
   const [errors, setErrors] = useState({});
+  const [serverErrors, setServerErrors] = useState({});
   const [redirect, setRedirect] = useState(false);
 
   const handleChange = (event) => {
@@ -48,19 +49,25 @@ const SocialMediaForm = () => {
     }
 
     setErrors(submitErrors);
+    setServerErrors({});
 
     if (Object.keys(submitErrors).length === 0) {
-      const response = await fetch("/api/v1/websites", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      if (response.ok) {
-        setRedirect(true);
-      } else {
-        console.error("Failed to add social media:", response.statusText);
+      try {
+        const response = await fetch("/api/v1/websites", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+        if (response.ok) {
+          setRedirect(true);
+        } else {
+          const errorMessage = await response.text();
+          setServerErrors({ message: errorMessage });
+        }
+      } catch (error) {
+        setServerErrors({ message: error.message });
       }
     }
   };
