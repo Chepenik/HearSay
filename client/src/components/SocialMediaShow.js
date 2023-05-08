@@ -10,32 +10,35 @@ const SocialMediaShow = (props) => {
     description: "",
   });
 
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState([])
+  const [newComment, setNewComment] = useState({ rating: "", comment: "" })
+
 
   const getSocialMedia = async () => {
-    const socialMediaId = props.match.params.id;
+    const socialMediaId = props.match.params.id
     try {
-      const response = await fetch(`/api/v1/websites/${socialMediaId}`);
+      const response = await fetch(`/api/v1/websites/${socialMediaId}`)
       if (!response.ok) {
-        const errorMessage = `${response.status} (${response.statusText})`;
-        const error = new Error(errorMessage);
-        throw error;
+        const errorMessage = `${response.status} (${response.statusText})`
+        const error = new Error(errorMessage)
+        throw error
       }
-      const body = await response.json();
-      setSocialMediaShow(body.website);
-      setComments(body.website.comments);
+      const body = await response.json()
+      setSocialMediaShow(body.website)
+      setComments(body.website.comments)
     } catch (err) {
-      console.error(`Error in fetch: ${err.message}`);
+      console.error(`Error in fetch: ${err.message}`)
     }
   };
 
   useEffect(() => {
-    getSocialMedia();
-  }, []);
+    getSocialMedia()
+  }, [])
 
   const handleCommentSubmit = async (event, newComment) => {
-    event.preventDefault();
-
+    event.preventDefault()
+    newComment.rating = parseFloat(newComment.rating)
+  
     try {
       const response = await fetch(`/api/v1/websites/${socialMediaShow.id}/comments`, {
         method: "POST",
@@ -44,21 +47,23 @@ const SocialMediaShow = (props) => {
         },
         body: JSON.stringify({ comment: newComment }),
       });
-
+  
       if (response.ok) {
-        const body = await response.json();
-        setComments([...comments, body.comment]);
+        const body = await response.json()
+        setComments([...comments, body.comment])
+        setNewComment({ rating: "", comment: "" })
       } else {
-        console.error("Failed to add comment:", response.statusText);
+        console.error("Failed to add comment:", response.statusText)
       }
     } catch (error) {
-      console.error(`Error in fetch: ${error.message}`);
+      console.error(`Error in fetch: ${error.message}`)
     }
-  };
+  }
+  
 
   const commentList = comments && comments.length > 0 ? (
     comments.map((comment, index) => (
-      <CommentTile key={comment.id} comment={comment} index={index} />
+      <CommentTile key={comment.id} comment={comment} index={index} rating={comment.rating}/>
     ))
   ) : (
     <p>No comments yet.</p>
