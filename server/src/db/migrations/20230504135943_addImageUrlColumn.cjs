@@ -7,7 +7,7 @@
  */
 exports.up = async (knex) => {
     return knex.schema.alterTable("websites", (table) => {
-        table.string("imageUrl").notNullable().defaultTo(null)
+        table.string("imageUrl").notNullable()
     })
 }
 

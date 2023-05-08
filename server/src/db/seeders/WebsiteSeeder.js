@@ -6,17 +6,20 @@ class WebsiteSeeder {
             {
                 name: "Twitter",
                 url: "https://twitter.com",
-                description: "Social media for short messages"
+                description: "Social media for short messages",
+                imageUrl: "Nick"
             },
             {
                 name: "Facebook",
                 url: "https://facebook.com",
-                description: "Social media for long messages"
+                description: "Social media for long messages",
+                imageUrl: "Nick"
             },
             {
                 name: "Instagram",
                 url: "https://instagram.com",
-                description: "Social media for pictures"
+                description: "Social media for pictures",
+                imageUrl: "Nick"
             }
         ]
 

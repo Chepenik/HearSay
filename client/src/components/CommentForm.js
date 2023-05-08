@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import CommentTile from "./CommentTile";
 
 const CommentForm = ({ handleCommentSubmit, comments }) => {
   const [newComment, setNewComment] = useState({
     rating: "",
     comment: "",
   });
+  const [errors, setErrors] = useState({});
 
   const handleCommentChange = (event) => {
     setNewComment({
@@ -16,16 +16,21 @@ const CommentForm = ({ handleCommentSubmit, comments }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // handleCommentSubmit(event, newComment);
-    // setNewComment("");
+    if (newComment.trim() !== "") {
+      // handleCommentSubmit(event, newComment);
+      // setNewComment("");
     handleCommentSubmit(event, newComment)
     setNewComment({
       ...newComment
     })
+      setErrors({});
+    } else {
+      setErrors({ comment: "Error: Comment cannot be empty." });
+    }
   };
 
   return (
-      <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
         <label>
           Rate the site:
           <input
@@ -36,19 +41,20 @@ const CommentForm = ({ handleCommentSubmit, comments }) => {
           />  
         </label>
 
-        <label>
-          Add a comment:
-          <input
-            type="text"
-            name="comment"
-            value={newComment.comment}
-            onChange={handleCommentChange}
-          />
-        </label>
-        <button type="submit" className="comment-btn">
-          Submit
-        </button>
-      </form>
+      <label>
+        Add a comment:
+        <input
+          type="text"
+          name="comment"
+          value={newComment.comment}
+          onChange={handleCommentChange}
+        />
+      </label>
+      {errors.comment && <div className="error">{errors.comment}</div>}
+      <button type="submit" className="comment-btn">
+        Submit
+      </button>
+    </form>
   );
 };
 
