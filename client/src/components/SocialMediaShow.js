@@ -8,7 +8,7 @@ const SocialMediaShow = (props) => {
     name: "",
     url: "",
     description: "",
-    comments: []
+    comments: [],
   })
 
   const getSocialMedia = async () => {
@@ -49,7 +49,10 @@ const SocialMediaShow = (props) => {
 
       if (response.ok) {
         const body = await response.json()
-        setSocialMediaShow({...socialMediaShow, comments: [...socialMediaShow.comments, body.comment]})
+        setSocialMediaShow({
+          ...socialMediaShow,
+          comments: [...socialMediaShow.comments, body.comment],
+        })
       } else {
         console.error("Failed to add comment:", response.statusText)
       }
@@ -58,26 +61,41 @@ const SocialMediaShow = (props) => {
     }
   }
 
-  const commentList = socialMediaShow.comments.length > 0 ? (
-    socialMediaShow.comments.map((comment) => (
+  const commentList =
+    socialMediaShow.comments.length > 0 ? (
+      socialMediaShow.comments.map((comment) => (
         <CommentTile
-            key={comment.id}
-            comment={comment}
-            rating={comment.rating}
+          key={comment.id}
+          comment={comment}
+          rating={comment.rating}
         />
-    ))
-) : (
-    <p>No comments yet.</p>
-);
+      ))
+    ) : (
+      <p>No comments yet.</p>
+    )
+
+  const averagePepperRating =
+    socialMediaShow.comments.length > 0
+      ? (
+          socialMediaShow.comments.reduce(
+            (sum, comment) => sum + comment.rating,
+            0
+          ) / socialMediaShow.comments.length
+        ).toFixed(1)
+      : "-"
 
   return (
     <div className="show-page">
       <h2 className="show-title">{socialMediaShow.name}</h2>
+      <div>Average Pepper Rating: {averagePepperRating}🌶️</div>
       <a href={socialMediaShow.url} target="_blank" rel="noreferrer">
         Check Out The Platform
       </a>
       <p>{socialMediaShow.description}</p>
-      <CommentForm handleCommentSubmit={handleCommentSubmit} comments={socialMediaShow.comments} />
+      <CommentForm
+        handleCommentSubmit={handleCommentSubmit}
+        comments={socialMediaShow.comments}
+      />
       <ul>{commentList}</ul>
     </div>
   )
