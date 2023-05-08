@@ -7,7 +7,7 @@
  */
 exports.up = async (knex) => {
     return knex.schema.alterTable("comments", (table) => {
-        table.integer("rating").notNullable().defaultTo(0)
+        table.integer("rating").notNullable()
     })
 }
 

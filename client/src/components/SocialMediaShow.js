@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import CommentForm from "./CommentForm";
-import CommentTile from "./CommentTile";
+import React, { useState, useEffect } from "react"
+import CommentForm from "./CommentForm"
+import CommentTile from "./CommentTile"
 
 const SocialMediaShow = (props) => {
   const [socialMediaShow, setSocialMediaShow] = useState({
@@ -8,11 +8,8 @@ const SocialMediaShow = (props) => {
     name: "",
     url: "",
     description: "",
-  });
-
-  const [comments, setComments] = useState([])
-  const [newComment, setNewComment] = useState({ rating: "", comment: "" })
-
+    comments: []
+  })
 
   const getSocialMedia = async () => {
     const socialMediaId = props.match.params.id
@@ -25,11 +22,10 @@ const SocialMediaShow = (props) => {
       }
       const body = await response.json()
       setSocialMediaShow(body.website)
-      setComments(body.website.comments)
     } catch (err) {
       console.error(`Error in fetch: ${err.message}`)
     }
-  };
+  }
 
   useEffect(() => {
     getSocialMedia()
@@ -38,20 +34,22 @@ const SocialMediaShow = (props) => {
   const handleCommentSubmit = async (event, newComment) => {
     event.preventDefault()
     newComment.rating = parseFloat(newComment.rating)
-  
+
     try {
-      const response = await fetch(`/api/v1/websites/${socialMediaShow.id}/comments`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ comment: newComment }),
-      });
-  
+      const response = await fetch(
+        `/api/v1/websites/${socialMediaShow.id}/comments`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ comment: newComment }),
+        }
+      )
+
       if (response.ok) {
         const body = await response.json()
-        setComments([...comments, body.comment])
-        setNewComment({ rating: "", comment: "" })
+        setSocialMediaShow({...socialMediaShow, comments: [...socialMediaShow.comments, body.comment]})
       } else {
         console.error("Failed to add comment:", response.statusText)
       }
@@ -59,15 +57,20 @@ const SocialMediaShow = (props) => {
       console.error(`Error in fetch: ${error.message}`)
     }
   }
-  
 
-  const commentList = comments && comments.length > 0 ? (
-    comments.map((comment, index) => (
-      <CommentTile key={comment.id} comment={comment} index={index} rating={comment.rating}/>
-    ))
-  ) : (
-    <p>No comments yet.</p>
-  );
+  const commentList =
+    socialMediaShow.comments && socialMediaShow.comments.length > 0 ? (
+      socialMediaShow.comments.map((comment, index) => (
+        <CommentTile
+          key={comment.id}
+          comment={comment}
+          index={index}
+          rating={comment.rating}
+        />
+      ))
+    ) : (
+      <p>No comments yet.</p>
+    )
 
   return (
     <div className="show-page">
@@ -76,10 +79,10 @@ const SocialMediaShow = (props) => {
         Check Out The Platform
       </a>
       <p>{socialMediaShow.description}</p>
-      <CommentForm handleCommentSubmit={handleCommentSubmit} />
+      <CommentForm handleCommentSubmit={handleCommentSubmit} comments={socialMediaShow.comments} />
       <ul>{commentList}</ul>
     </div>
-  );
-};
+  )
+}
 
-export default SocialMediaShow;
+export default SocialMediaShow
