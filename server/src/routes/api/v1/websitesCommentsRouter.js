@@ -13,7 +13,6 @@ websitesCommentsRouter.post("/", async (req, res) => {
     const newComment = await Comment.query().insert({ rating, comment, userId, websiteId });
     return res.status(201).json({ comment: newComment });
   } catch (error) {
-    console.error(`ERROR ${error.message}`);
     if (error instanceof ValidationError) {
       return res.status(422).json({ errors: error.data })
     }

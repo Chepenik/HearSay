@@ -58,19 +58,17 @@ const SocialMediaShow = (props) => {
     }
   }
 
-  const commentList =
-    socialMediaShow.comments && socialMediaShow.comments.length > 0 ? (
-      socialMediaShow.comments.map((comment, index) => (
+  const commentList = socialMediaShow.comments.length > 0 ? (
+    socialMediaShow.comments.map((comment) => (
         <CommentTile
-          key={comment.id}
-          comment={comment}
-          index={index}
-          rating={comment.rating}
+            key={comment.id}
+            comment={comment}
+            rating={comment.rating}
         />
-      ))
-    ) : (
-      <p>No comments yet.</p>
-    )
+    ))
+) : (
+    <p>No comments yet.</p>
+);
 
   return (
     <div className="show-page">
