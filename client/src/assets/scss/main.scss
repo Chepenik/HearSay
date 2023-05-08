@@ -207,3 +207,37 @@ textarea {
 .comment-btn:hover {
   background-color: #c3d4e7;
   }
+
+.customSlider {
+  width: 100%;
+  height: 30px;
+  border-radius: 5px;
+  background-color: #ddd;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  position: relative;
+  font-size: 18px;
+}
+
+.customSlider-track {
+  height: 100%;
+  background-color: #00ff22;
+  border-radius: 5px 5px 5px 0;
+}
+
+.customSlider-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #00ff22;
+  cursor: grab;
+  outline: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+}
