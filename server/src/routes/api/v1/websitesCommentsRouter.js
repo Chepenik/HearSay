@@ -20,5 +20,15 @@ websitesCommentsRouter.post("/", async (req, res) => {
   }
 });
 
+websitesCommentsRouter.delete("/:id", async (req, res) => {
+  const { id } = req.params
+
+  try {
+    await Comment.query().deleteById(id)
+    return res.status(200).json({message: "Comment was deleted"})
+  } catch (error) {
+    return res.status(500).json({ errors: error})
+  }
+})
 
 export default websitesCommentsRouter;

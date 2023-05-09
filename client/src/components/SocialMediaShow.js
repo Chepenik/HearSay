@@ -68,6 +68,7 @@ const SocialMediaShow = (props) => {
           key={comment.id}
           comment={comment}
           rating={comment.rating}
+          handleCommentDelete={handleCommentDelete}
         />
       ))
     ) : (
@@ -83,6 +84,22 @@ const SocialMediaShow = (props) => {
           ) / socialMediaShow.comments.length
         ).toFixed(1)
       : "-"
+
+  const handleCommentDelete = async (commentId) => {
+    try { 
+      console.log("HI")
+      const response = await fetch(`/api/v1/websites/${socialMediaShow.id}/comments/${commentId}`, { method: "DELETE" })  
+      // console.log(response)
+      const filteredComments = comments.filter((comment) => {
+        if (comment.id !== commentId) {
+          return comment
+        }
+      })
+      setComments(filteredComments)
+    } catch (error) {
+    console.error(`Error in fetch: ${error.message}`)
+}
+  }
 
   return (
     <div className="show-page">
