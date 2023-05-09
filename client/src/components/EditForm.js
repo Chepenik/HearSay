@@ -1,11 +1,40 @@
-import React from "react";
-// import Slider from "react-slider";
-// import { Redirect } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import Slider from "react-slider";
+import { Redirect } from "react-router-dom";
 
-// const EditForm = () => {
+const EditForm = (props) => {
+    const [commentState, setCommentState] = useState({
+        rating: "",
+        comment: "",
+    })
+    const [errors, setErrors] = useState({})
+    const [redirect, setRedirect] = useState(false)
+
+    const getComment = async () => {
+        const commentId = props.match.params.id 
+        console.log(props)
+        try {
+            const response = await fetch(`/api/v1/comments/${commentId}`)
+            if (!response.ok) {
+                const errorMessage = `${response.status} (${response.statusText})`
+                const error = new Error(errorMessage)
+                throw error
+            }
+            const body = await response.json()
+            console.log(body)
+            setCommentState(body.comment)
+        } catch (error) {
+            console.error(`Error in fetch: ${error.message}`)
+        }
+    }
+
+    useEffect(() => {
+        getComment()
+    }, [])
+
 // const [selectedComment, setEditedComment] = useState({
-//     rating: selectedComment.rating,
-//     comment: selectedComment.comment,
+//     rating: socialMediaShow.rating,
+//     comment: socialMediaShow.comment,
 // });
 // const [errors, setErrors] = useState({});
 
@@ -31,26 +60,41 @@ import React from "react";
 //     setNewComment({ ...selectedComment, rating: value });
 // };
 
-// const sliderProps = {
-//     min: 1,
-//     max: 5,
-//     value: selectedComment.rating,
-//     onChange: handleSliderChange,
-//     className: "customSlider",
-//     trackClassName: "customSlider-track",
-//     thumbClassName: "customSlider-thumb",
-//     renderThumb: (props, state) => (
-//     <span {...props}>
-//         {state.valueNow}
-//         🌶️
-//     </span>
-//     ),
-// };
-
-const EditForm = () => {
+const sliderProps = {
+    min: 1,
+    max: 5,
+    // value: selectedComment.rating,
+    // onChange: handleSliderChange,
+    className: "customSlider",
+    trackClassName: "customSlider-track",
+    thumbClassName: "customSlider-thumb",
+    renderThumb: (props, state) => (
+    <span {...props}>
+        {state.valueNow}
+        🌶️
+    </span>
+    ),
+};
 
 return (
-    <p>Soon This Will Be An Edit Form</p>
+<form className="form-container">
+        <h5 className="form-title">Edit Your Comment</h5>
+    <label>
+        Edit Your Pepper Rating!
+    <Slider {...sliderProps} />
+    </label>
+        <div className="form-group">
+        <label>
+        Comment:
+            <input
+                type="text"
+                name="comment"
+                // value={newComment.comment}
+                // onChange={handleCommentChange}
+            />
+        </label>
+        </div>
+    </form>
 )
 
 

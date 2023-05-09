@@ -80,7 +80,7 @@ const SocialMediaShow = (props) => {
   }
 // "/comments/:id/edit"
 // make fetch request to get the comment based on id to edit
-// set in state, have state tied to to input fields so that values are pre-populated
+// set in state, have state tied to input fields so that values are pre-populated
 // will want to make sure only the user that created the comment can edit
 const handleCommentEdit = async (commentId, updatedCommentData) => {
     try { 
