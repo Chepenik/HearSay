@@ -56,9 +56,25 @@ const SocialMediaShow = (props) => {
     }
   };
 
+  const handleCommentDelete = async (commentId) => {
+    try { 
+      console.log("HI")
+      const response = await fetch(`/api/v1/websites/${socialMediaShow.id}/comments/${commentId}`, { method: "DELETE" })  
+      // console.log(response)
+      const filteredComments = comments.filter((comment) => {
+        if (comment.id !== commentId) {
+          return comment
+        }
+      })
+      setComments(filteredComments)
+    } catch (error) {
+    console.error(`Error in fetch: ${error.message}`)
+}
+  }
+  
   const commentList = comments && comments.length > 0 ? (
     comments.map((comment, index) => (
-      <CommentTile key={comment.id} comment={comment} index={index} />
+      <CommentTile key={comment.id} comment={comment} index={index} handleCommentDelete={handleCommentDelete} />
     ))
   ) : (
     <p>No comments yet.</p>
