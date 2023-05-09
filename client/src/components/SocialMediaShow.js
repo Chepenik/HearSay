@@ -61,19 +61,62 @@ const SocialMediaShow = (props) => {
     }
   }
 
-  const commentList =
-    socialMediaShow.comments.length > 0 ? (
-      socialMediaShow.comments.map((comment) => (
-        <CommentTile
-          key={comment.id}
-          comment={comment}
-          rating={comment.rating}
-          handleCommentDelete={handleCommentDelete}
-        />
-      ))
-    ) : (
-      <p>No comments yet.</p>
-    )
+  const handleCommentDelete = async (commentId) => {
+    try { 
+      const response = await fetch(`/api/v1/websites/${socialMediaShow.id}/comments/${commentId}`, { method: "DELETE" })  
+      const filteredComments = socialMediaShow.comments.filter((comment) => {
+        if (comment.id !== commentId) {
+          return comment
+        }
+      })
+      setSocialMediaShow({
+        ...socialMediaShow,
+        comments: filteredComments
+      })
+      
+    } catch (error) {
+    console.error(`Error in fetch: ${error.message}`)
+}
+  }
+// "/comments/:id/edit"
+// make fetch request to get the comment based on id to edit
+// set in state, have state tied to to input fields so that values are pre-populated
+// will want to make sure only the user that created the comment can edit
+const handleCommentEdit = async (commentId, updatedCommentData) => {
+    try { 
+      console.log("FRONT-END")
+      const response = await fetch(
+        `/api/v1/websites/${socialMediaShow.id}/comments/${commentId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedCommentData),
+        }
+      );  
+      console.log(response)
+      const body = await response.json()
+      console.log(body)
+      if (response.ok) {
+        const updatedComments = socialMediaShow.comments.map((comment) =>
+          comment.id === commentId ? { ...comment, ...updatedCommentData } : comment
+        )
+        // console.log(response.body)
+        // setSocialMediaShow({
+        //   ...socialMediaShow,
+        //   comments: updatedComments,
+        // })
+        // in the refactor, won't need to set state will instead redirect back to site show page when edit successful
+
+      } else {
+        console.error("Failed to update comment:", response.statusText)
+      }
+    } catch (error) {
+      console.error(`Error in fetch: ${error.message}`)
+    }
+  }
+  
 
   const averagePepperRating =
     socialMediaShow.comments.length > 0
@@ -85,21 +128,20 @@ const SocialMediaShow = (props) => {
         ).toFixed(1)
       : "-"
 
-  const handleCommentDelete = async (commentId) => {
-    try { 
-      console.log("HI")
-      const response = await fetch(`/api/v1/websites/${socialMediaShow.id}/comments/${commentId}`, { method: "DELETE" })  
-      // console.log(response)
-      const filteredComments = comments.filter((comment) => {
-        if (comment.id !== commentId) {
-          return comment
-        }
-      })
-      setComments(filteredComments)
-    } catch (error) {
-    console.error(`Error in fetch: ${error.message}`)
-}
-  }
+  const commentList =
+    socialMediaShow.comments.length > 0 ? (
+      socialMediaShow.comments.map((comment) => (
+        <CommentTile
+          key={comment.id}
+          comment={comment}
+          rating={comment.rating}
+          handleCommentDelete={handleCommentDelete}
+          handleCommentEdit={handleCommentEdit}
+        />
+      ))
+    ) : (
+      <p>No comments yet.</p>
+    )
 
   return (
     <div className="show-page">
