@@ -6,26 +6,27 @@ const SocialMediaShow = (props) => {
   const [socialMediaShow, setSocialMediaShow] = useState({
     id: "",
     name: "",
+    imageUrl: "",
     url: "",
     description: "",
     comments: [],
   })
 
   const getSocialMedia = async () => {
-    const socialMediaId = props.match.params.id
+    const socialMediaId = props.match.params.id;
     try {
-      const response = await fetch(`/api/v1/websites/${socialMediaId}`)
+      const response = await fetch(`/api/v1/websites/${socialMediaId}`);
       if (!response.ok) {
-        const errorMessage = `${response.status} (${response.statusText})`
-        const error = new Error(errorMessage)
-        throw error
+        const errorMessage = `${response.status} (${response.statusText})`;
+        const error = new Error(errorMessage);
+        throw error;
       }
-      const body = await response.json()
-      setSocialMediaShow(body.website)
+      const body = await response.json();
+      setSocialMediaShow(body.website);
     } catch (err) {
-      console.error(`Error in fetch: ${err.message}`)
+      console.error(`Error in fetch: ${err.message}`);
     }
-  }
+  };  
 
   useEffect(() => {
     getSocialMedia()
@@ -104,6 +105,7 @@ const SocialMediaShow = (props) => {
   return (
     <div className="show-page">
       <h2 className="show-title">{socialMediaShow.name}</h2>
+      <img src={socialMediaShow.imageUrl} alt={socialMediaShow.name} />
       <div>Average Pepper Rating: {averagePepperRating}🌶️</div>
       <a href={socialMediaShow.url} target="_blank" rel="noreferrer">
         Check Out The Platform
