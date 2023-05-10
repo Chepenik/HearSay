@@ -25,7 +25,6 @@ const VoteTile = ({ commentId }) => {
         console.error(`Error in fetch: ${error.message}`);
       }
     } else {
-      // If the user has already voted, then we need to delete their vote.
       try {
         const response = await fetch(`/api/v1/votes/${commentId}`, {
           method: "DELETE",
