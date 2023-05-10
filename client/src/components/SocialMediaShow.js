@@ -73,18 +73,13 @@ const SocialMediaShow = (props) => {
         ...socialMediaShow,
         comments: filteredComments
       })
-      
     } catch (error) {
     console.error(`Error in fetch: ${error.message}`)
 }
   }
-// "/comments/:id/edit"
-// make fetch request to get the comment based on id to edit
-// set in state, have state tied to input fields so that values are pre-populated
-// will want to make sure only the user that created the comment can edit
+
 const handleCommentEdit = async (commentId, updatedCommentData) => {
     try { 
-      console.log("FRONT-END")
       const response = await fetch(
         `/api/v1/websites/${socialMediaShow.id}/comments/${commentId}`,
         {
@@ -95,20 +90,10 @@ const handleCommentEdit = async (commentId, updatedCommentData) => {
           body: JSON.stringify(updatedCommentData),
         }
       );  
-      console.log(response)
-      const body = await response.json()
-      console.log(body)
       if (response.ok) {
         const updatedComments = socialMediaShow.comments.map((comment) =>
           comment.id === commentId ? { ...comment, ...updatedCommentData } : comment
         )
-        // console.log(response.body)
-        // setSocialMediaShow({
-        //   ...socialMediaShow,
-        //   comments: updatedComments,
-        // })
-        // in the refactor, won't need to set state will instead redirect back to site show page when edit successful
-
       } else {
         console.error("Failed to update comment:", response.statusText)
       }
@@ -117,7 +102,6 @@ const handleCommentEdit = async (commentId, updatedCommentData) => {
     }
   }
   
-
   const averagePepperRating =
     socialMediaShow.comments.length > 0
       ? (

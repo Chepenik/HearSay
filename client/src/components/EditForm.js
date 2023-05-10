@@ -4,16 +4,16 @@ import { Redirect } from "react-router-dom";
 
 const EditForm = (props) => {
     const [commentState, setCommentState] = useState({
-        rating: 0,
+        rating: 1,
         comment: "",
     });
+    const [websiteId, setWebsiteId] = useState(null)
     
     const [errors, setErrors] = useState({});
     const [redirect, setRedirect] = useState(false);
 
     const getComment = async () => {
         const commentId = props.match.params.id;
-        console.log(props);
         try {
         const response = await fetch(`/api/v1/comments/${commentId}`);
         if (!response.ok) {
@@ -24,6 +24,7 @@ const EditForm = (props) => {
         const body = await response.json();
         const { rating, comment } = body.comment;
         setCommentState({ rating, comment });
+        setWebsiteId(body.website.id)
         } catch (error) {
         console.error(`Error in fetch: ${error.message}`);
         }
@@ -50,10 +51,6 @@ const EditForm = (props) => {
             body: JSON.stringify({ comment: updatedCommentData }),
             }
         );
-        // const body = await response.json();
-        const responseText = await response.text()
-        console.log(responseText)
-        const body = JSON.parse(responseText)
         if (response.ok) {
             setRedirect(true);
         } else {
@@ -78,17 +75,21 @@ const EditForm = (props) => {
         ),
     };
 
+    if (redirect) {
+        return <Redirect to={`/websites/${websiteId}`} />
+        }
+   
     return (
         <div>
-        {redirect && <Redirect to={`/websites/${props.match.params.id}`} />}
         <form className="form-container" onSubmit={handleCommentEdit}>
             <h5 className="form-title">Edit Your Comment</h5>
             <Slider
-            {...sliderProps}
-            value={commentState.rating}
-            onChange={(value) =>
-                setCommentState({ ...commentState, rating: value })
-            }
+                {...sliderProps}
+                value={commentState.rating}
+                onChange={(value) => {
+                        setCommentState({ ...commentState, rating: value })
+                    }
+                }
             />
 
             <input

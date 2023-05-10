@@ -6,15 +6,12 @@ import "../assets/scss/main.scss";
 import RegistrationForm from "./registration/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
-
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute"
 import UserProfile from "./UserProfile";
 import SocialMediaShow from "./SocialMediaShow";
 import SocialMediaForm from "./SocialMediaForm";
 import SocialMediaList from "./SocialMediaList";
-
 import EditForm from "./EditForm";
-import EditFormWorking from "./EditFormWorking";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -40,7 +37,7 @@ const App = (props) => {
         </Route>
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
-        <Route exact path="/websites/:id/edit" component={EditForm} />
+        <Route exact path="/comments/:id/edit" component={EditForm} />
         <Route exact path="/websites/:id" component={SocialMediaShow} />
         <AuthenticatedRoute exact path="/profile" component ={UserProfile} user={currentUser} />
         <AuthenticatedRoute
