@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slider";
 import { Redirect } from "react-router-dom";
 
-const EditForm = (props) => {
+const EditFormWorking = (props) => {
     const [commentState, setCommentState] = useState({
         rating: 0,
         comment: "",
@@ -34,26 +34,22 @@ const EditForm = (props) => {
     }, []);
 
     const handleCommentEdit = async (event) => {
-        event.preventDefault();
+        // event.preventDefault();
         const commentId = props.match.params.id;
         const updatedCommentData = { ...commentState };
         updatedCommentData.rating = parseFloat(updatedCommentData.rating);
 
         try {
-        const response = await fetch(
-            `/api/v1/comments/${commentId}`,
+        const response = await fetch(`/api/v1/comments/${commentId}`,
             {
             method: "PATCH",
-            headers: {
+            headers: new Headers({
                 "Content-Type": "application/json",
-            },
+            }),
             body: JSON.stringify({ comment: updatedCommentData }),
             }
         );
         // const body = await response.json();
-        const responseText = await response.text()
-        console.log(responseText)
-        const body = JSON.parse(responseText)
         if (response.ok) {
             setRedirect(true);
         } else {
@@ -78,10 +74,15 @@ const EditForm = (props) => {
         ),
     };
 
+    const handleSubmit = event => {
+        event.preventDefault()
+        handleCommentEdit()
+    }
+
     return (
         <div>
         {redirect && <Redirect to={`/websites/${props.match.params.id}`} />}
-        <form className="form-container" onSubmit={handleCommentEdit}>
+        <form className="form-container" onSubmit={handleSubmit}>
             <h5 className="form-title">Edit Your Comment</h5>
             <Slider
             {...sliderProps}
@@ -109,4 +110,4 @@ const EditForm = (props) => {
     );
 };
 
-export default EditForm;
+export default EditFormWorking;

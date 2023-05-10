@@ -12,7 +12,9 @@ import UserProfile from "./UserProfile";
 import SocialMediaShow from "./SocialMediaShow";
 import SocialMediaForm from "./SocialMediaForm";
 import SocialMediaList from "./SocialMediaList";
+
 import EditForm from "./EditForm";
+import EditFormWorking from "./EditFormWorking";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -38,8 +40,8 @@ const App = (props) => {
         </Route>
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
-        <Route exact path="/websites/:id" component={SocialMediaShow} />
         <Route exact path="/websites/:id/edit" component={EditForm} />
+        <Route exact path="/websites/:id" component={SocialMediaShow} />
         <AuthenticatedRoute exact path="/profile" component ={UserProfile} user={currentUser} />
         <AuthenticatedRoute
           exact path="/add-site"
