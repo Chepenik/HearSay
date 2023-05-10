@@ -28,7 +28,6 @@ commentsRouter.get("/:id/edit", async (req, res) => {
 
 commentsRouter.patch("/:id", async (req, res) => {
     const { id } = req.params;
-    console.log(id)
 
     try {
     const commentData = req.body.comment;

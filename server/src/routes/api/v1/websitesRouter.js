@@ -63,7 +63,6 @@ websitesRouter.get("/:id/edit", async (req, res) => {
 
 websitesRouter.patch("/:id", async (req, res) => {
     const { id } = req.params;
-    console.log(id)
 
     try {
     const commentData = req.body.comment;
