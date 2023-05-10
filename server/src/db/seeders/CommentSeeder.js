@@ -16,17 +16,20 @@ class CommentSeeder {
             {
                 comment: "This is a great platform!",
                 websiteId: websiteOne.id,
-                userId: 1
+                userId: 1,
+                rating: 5
             },
             {
                 comment: "I don't like this platform.",
                 websiteId: websiteTwo.id,
-                userId: 2
+                userId: 2,
+                rating: 1
             },
             {
                 comment: "I have mixed feelings about this platform.",
                 websiteId: websiteThree.id,
-                userId: 3
+                userId: 3,
+                rating: 4
             }
         ]
 

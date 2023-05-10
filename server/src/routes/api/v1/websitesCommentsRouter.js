@@ -14,11 +14,10 @@ websitesCommentsRouter.post("/", async (req, res) => {
     return res.status(201).json({ comment: newComment });
   } catch (error) {
     if (error instanceof ValidationError) {
-      return res.status(422).json({ errors: error.data })
+      return res.status(422).json({ errors: error.data });
     }
-    return res.status(500).json({ error: "Unable to add comment" })
+    return res.status(500).json({ error: "Unable to add comment" });
   }
 });
-
 
 export default websitesCommentsRouter;

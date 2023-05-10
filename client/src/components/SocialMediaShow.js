@@ -96,9 +96,12 @@ const SocialMediaShow = (props) => {
         handleCommentSubmit={handleCommentSubmit}
         comments={socialMediaShow.comments}
       />
-      <ul>{commentList}</ul>
+      <ul>
+        {commentList}
+      </ul>
+      
     </div>
   )
 }
 
-export default SocialMediaShow
+export default SocialMediaShow;
