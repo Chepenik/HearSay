@@ -8,8 +8,6 @@ const CommentTile = ({ comment, handleCommentDelete, currentUser}) => {
     handleCommentDelete(id)
   }
 
-  console.log(currentUser)
-
   const isAdmin = currentUser && currentUser.admin === true
   const isSameUser = currentUser && currentUser.id === userId
 
