@@ -8,7 +8,6 @@ commentsRouter.get("/:id", async (req, res) => {
     const { id } = req.params
     try {
         const comment = await Comment.query().findById(id)
-        console.log(comment)
         const website = await comment.$relatedQuery("website")
         const serializedComment = await CommentSerializer.showCommentDetails(comment)
         return res.status(200).json({ website: website, comment: serializedComment })
