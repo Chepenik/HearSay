@@ -2,17 +2,22 @@ import React from "react";
 import { Link } from "react-router-dom"
 
 const CommentTile = ({ comment, handleCommentDelete, currentUser}) => {
-  const { id, comment: text, rating } = comment;
+  const { id, comment: text, rating, userId } = comment;
 
   const handleClickDelete = () => {
     handleCommentDelete(id)
   }
 
+  console.log(currentUser)
+
+  const isAdmin = currentUser && currentUser.admin === true
+  const isSameUser = currentUser && currentUser.id === userId
+
   return (
     <div className="comment-tile">
       <p>Rating: {rating}</p>
       <p>{text}</p>
-      {currentUser && currentUser.id === comment.userId && (
+      {(isSameUser || isAdmin) && (
         <> 
         <button type="delete" onClick={handleClickDelete}>Delete</button>
         <br></br>
@@ -22,7 +27,8 @@ const CommentTile = ({ comment, handleCommentDelete, currentUser}) => {
         </>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default CommentTile;
+export default CommentTile
+
