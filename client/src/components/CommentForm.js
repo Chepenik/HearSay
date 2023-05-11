@@ -52,7 +52,6 @@ const CommentForm = ({ handleCommentSubmit, comments }) => {
         Slide To Choose Your Pepper Rating!
         <Slider {...sliderProps} />
       </label>
-
       <label>
         Add a comment:
         <input
