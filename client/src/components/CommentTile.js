@@ -13,13 +13,13 @@ const CommentTile = ({ comment, handleCommentDelete, currentUser}) => {
       <p>Rating: {rating}</p>
       <p>{text}</p>
       {currentUser && currentUser.id === comment.userId && (
-      <> 
-      <button type="delete" onClick={handleClickDelete}>Delete</button>
-      <br></br>
-      <Link to={`/comments/${id}/edit`} className="social-media-item">
-        <p>Edit Your Comment</p>
-      </Link>
-      </>
+        <> 
+        <button type="delete" onClick={handleClickDelete}>Delete</button>
+        <br></br>
+        <Link to={`/comments/${id}/edit`} className="social-media-item">
+          <p>Edit Your Comment</p>
+        </Link>
+        </>
       )}
     </div>
   );

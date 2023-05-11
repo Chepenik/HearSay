@@ -40,9 +40,7 @@ const EditForm = (props) => {
         const updatedCommentData = { ...commentState };
         updatedCommentData.rating = parseFloat(updatedCommentData.rating);
         try {
-            const response = await fetch(
-                `/api/v1/comments/${commentId}`,
-                {
+            const response = await fetch(`/api/v1/comments/${commentId}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
