@@ -15,7 +15,7 @@ const TopBar = ({ user }) => {
   ];
 
   const authenticatedListItems = [
-    <li>
+    <li key="profile">
       <Link to="/profile">Your Profile</Link>
     </li>,
     <li key="add-site">

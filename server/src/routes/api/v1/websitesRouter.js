@@ -18,7 +18,7 @@ websitesRouter.get("/", async (req, res) => {
     }
 })
 
-websitesRouter.get("/:id", async (req, res) =>{
+websitesRouter.get("/:id", async (req, res) => {
     const { id } = req.params
     try {
         const website = await Website.query().findById(id)
