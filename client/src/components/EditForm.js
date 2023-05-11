@@ -15,16 +15,16 @@ const EditForm = (props) => {
     const getComment = async () => {
         const commentId = props.match.params.id;
         try {
-        const response = await fetch(`/api/v1/comments/${commentId}`);
-        if (!response.ok) {
-            const errorMessage = `${response.status} (${response.statusText})`;
-            const error = new Error(errorMessage);
-            throw error;
-        }
-        const body = await response.json();
-        const { rating, comment } = body.comment;
-        setCommentState({ rating, comment });
-        setWebsiteId(body.website.id)
+            const response = await fetch(`/api/v1/comments/${commentId}`);
+            if (!response.ok) {
+                const errorMessage = `${response.status} (${response.statusText})`;
+                const error = new Error(errorMessage);
+                throw error;
+            }
+            const body = await response.json();
+            const { rating, comment, userId } = body.comment;
+            setCommentState({ rating, comment, userId });
+            setWebsiteId(body.website.id)
         } catch (error) {
             console.error(`Error in fetch: ${error.message}`);
         }
@@ -39,17 +39,14 @@ const EditForm = (props) => {
         const commentId = props.match.params.id;
         const updatedCommentData = { ...commentState };
         updatedCommentData.rating = parseFloat(updatedCommentData.rating);
-
         try {
-        const response = await fetch(
-            `/api/v1/comments/${commentId}`,
-            {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ comment: updatedCommentData }),
-            }
+            const response = await fetch(`/api/v1/comments/${commentId}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ comment: updatedCommentData }),
+                }
         );
         if (response.ok) {
             setRedirect(true);

@@ -38,7 +38,7 @@ const App = (props) => {
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
         <Route exact path="/comments/:id/edit" component={EditForm} />
-        <Route exact path="/websites/:id" component={SocialMediaShow} />
+        <Route path="/websites/:id" render={(props) => <SocialMediaShow {...props} currentUser={currentUser} />}/>
         <AuthenticatedRoute exact path="/profile" component ={UserProfile} user={currentUser} />
         <AuthenticatedRoute
           exact path="/add-site"

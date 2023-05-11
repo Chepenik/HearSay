@@ -12,6 +12,11 @@ const SocialMediaShow = (props) => {
     comments: [],
   })
 
+  const [commentState, setCommentState] = useState({
+    rating: 1,
+    comment: "",
+});
+
   const getSocialMedia = async () => {
     const socialMediaId = props.match.params.id;
     try {
@@ -26,8 +31,8 @@ const SocialMediaShow = (props) => {
     } catch (err) {
       console.error(`Error in fetch: ${err.message}`);
     }
-  };  
-
+  };
+  
   useEffect(() => {
     getSocialMedia()
   }, [])
@@ -75,7 +80,7 @@ const SocialMediaShow = (props) => {
         comments: filteredComments
       })
     } catch (error) {
-    console.error(`Error in fetch: ${error.message}`)
+      console.error(`Error in fetch: ${error.message}`)
 }
   }
 
@@ -122,6 +127,7 @@ const handleCommentEdit = async (commentId, updatedCommentData) => {
           rating={comment.rating}
           handleCommentDelete={handleCommentDelete}
           handleCommentEdit={handleCommentEdit}
+          currentUser={props.currentUser}
         />
       ))
     ) : (
