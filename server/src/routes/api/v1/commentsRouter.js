@@ -22,9 +22,9 @@ commentsRouter.patch("/:id", async (req, res) => {
         const commentData = req.body.comment;
         const comment = await Comment.query().findById(id);
         const updatedComment = await Comment.query().patch(commentData).findById(id);
-    return res.status(200).json({ comment: updatedComment });
+        return res.status(200).json({ comment: updatedComment });
     } catch (error) {
-    console.error(error);
+        console.error(error);
         return res.status(500).json({ errors: error });
     }
 });

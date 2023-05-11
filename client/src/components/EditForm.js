@@ -26,7 +26,7 @@ const EditForm = (props) => {
         setCommentState({ rating, comment });
         setWebsiteId(body.website.id)
         } catch (error) {
-        console.error(`Error in fetch: ${error.message}`);
+            console.error(`Error in fetch: ${error.message}`);
         }
     };
 
@@ -57,7 +57,7 @@ const EditForm = (props) => {
             console.error("Failed to update comment:", response.statusText);
         }
         } catch (error) {
-        console.error(`Error in fetch: ${error.message}`);
+            console.error(`Error in fetch: ${error.message}`);
         }
     };
 
@@ -77,36 +77,35 @@ const EditForm = (props) => {
 
     if (redirect) {
         return <Redirect to={`/websites/${websiteId}`} />
-        }
-   
-    return (
-        <div>
-        <form className="form-container" onSubmit={handleCommentEdit}>
-            <h5 className="form-title">Edit Your Comment</h5>
-            <Slider
-                {...sliderProps}
-                value={commentState.rating}
-                onChange={(value) => {
-                        setCommentState({ ...commentState, rating: value })
-                    }
-                }
-            />
+    }
 
-            <input
-            type="text"
-            name="comment"
-            value={commentState.comment}
-            onChange={(event) =>
-                setCommentState({
-                ...commentState,
-                comment: event.target.value,
-                })
-            }
-            />
-            <div className="form-errors">{errors.comment}</div>
-            <button type="submit">Submit</button>
-        </form>
-        </div>
+    return (
+        <>
+            <form className="form-container" onSubmit={handleCommentEdit}>
+                <h5 className="form-title">Edit Your Comment</h5>
+                <Slider
+                    {...sliderProps}
+                    value={commentState.rating}
+                    onChange={(value) => {
+                            setCommentState({ ...commentState, rating: value })
+                        }
+                    }
+                />
+                <input
+                    type="text"
+                    name="comment"
+                    value={commentState.comment}
+                    onChange={(event) =>
+                            setCommentState({
+                            ...commentState,
+                            comment: event.target.value,
+                        })
+                    }
+                />
+                <div className="form-errors">{errors.comment}</div>
+                <button type="submit">Submit</button>
+            </form>
+        </>
     );
 };
 
