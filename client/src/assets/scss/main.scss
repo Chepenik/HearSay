@@ -11,6 +11,9 @@
 body {
   background-color: #d2d2d2; 
   font-family: 'Crimson Pro', serif;
+  background-image: url("https://i.imgur.com/nWIbd0O.png");
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 :root {
@@ -63,8 +66,13 @@ body {
 .hearsay {
   text-align: center;
   margin: 0 auto;
-  color:#000000; 
   font-family: 'Crimson Pro', serif;
+  color: #ffffff;
+  font-size: 70px;
+}
+
+.hearsay h5 {
+  margin-bottom: 50px;
 }
 
 .top-bar ul {
@@ -74,6 +82,10 @@ body {
 .top-bar {
   background-color: #41644A;
   color: #000000;
+}
+
+.top-bar a {
+  color: #ffffff;
 }
 
 .menu {
@@ -88,7 +100,9 @@ body {
 }
 
 a {
-  color: #ff7700;
+  color: #ffffff;
+  font-size: 20px;
+
 }
 
 .button {
@@ -250,4 +264,17 @@ textarea {
   justify-content: center;
   align-items: center;
   font-size: 18px;
+}
+
+.fa-solid {
+  color: #ff7700;
+}
+
+.siteLink {
+  color: #ff7700;
+}
+
+.userProfile {
+  color: #ffffff;
+  margin-left: 25px;
 }
