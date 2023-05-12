@@ -139,7 +139,7 @@ const handleCommentEdit = async (commentId, updatedCommentData) => {
       <h2 className="show-title">{socialMediaShow.name}</h2>
       <img src={socialMediaShow.imageUrl} alt={socialMediaShow.name} />
       <div>Average Pepper Rating: {averagePepperRating}🌶️</div>
-      <a href={socialMediaShow.url} target="_blank" rel="noreferrer">
+      <a href={socialMediaShow.url} target="_blank" rel="noreferrer" className="siteLink">
         Check Out The Platform
       </a>
       <p>{socialMediaShow.description}</p>
