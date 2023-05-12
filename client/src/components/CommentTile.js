@@ -17,16 +17,14 @@ const CommentTile = ({ comment, handleCommentDelete, currentUser}) => {
       <p>{text}</p>
       {(isSameUser || isAdmin) && (
         <> 
-        <button type="delete" onClick={handleClickDelete}>Delete</button>
-        <br></br>
-        <Link to={`/comments/${id}/edit`} className="social-media-item">
-          <p>Edit Your Comment</p>
-        </Link>
+        <i type="button" className="fa-regular fa-trash-can editDelete" onClick={handleClickDelete}></i>
+        <Link to={`/comments/${id}/edit`}> <i className="fa-solid fa-pencil editDelete"></i>
+        </Link> 
         </>
       )}
     </div>
-  )
-}
+  );
+};
 
 export default CommentTile
 
