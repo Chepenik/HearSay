@@ -100,7 +100,7 @@ const EditForm = (props) => {
                     }
                 />
                 <div className="form-errors">{errors.comment}</div>
-                <button type="submit">Submit</button>
+                <button type="submit" class="comment-btn">Submit</button>
             </form>
         </>
     );
